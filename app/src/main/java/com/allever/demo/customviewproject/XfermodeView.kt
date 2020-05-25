@@ -74,9 +74,11 @@ class XfermodeView : View {
 //        //
 //        setXfermode(canvas, PorterDuff.Mode.DST_ATOP)
 //
+//        //
+//        setXfermode(canvas, PorterDuff.Mode.CLEAR)
+//
         //
-        setXfermode(canvas, PorterDuff.Mode.CLEAR)
-
+        setXfermode(canvas, PorterDuff.Mode.XOR)
     }
 
     private fun originWithoutXfermode(canvas: Canvas?) {
