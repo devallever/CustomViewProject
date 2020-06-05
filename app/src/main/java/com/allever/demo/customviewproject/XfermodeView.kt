@@ -47,8 +47,11 @@ class XfermodeView : View {
 //
 //        setXfermode(canvas, PorterDuff.Mode.SRC)
 //
-        //源图像覆盖在上面
-        setXfermode(canvas, PorterDuff.Mode.SRC_OVER)
+//        //源图像覆盖在上面
+//        setXfermode(canvas, PorterDuff.Mode.SRC_OVER)
+//
+        //
+        setXfermode(canvas, PorterDuff.Mode.SRC_IN)
     }
 
     private fun originWithoutXfermode(canvas: Canvas?) {
