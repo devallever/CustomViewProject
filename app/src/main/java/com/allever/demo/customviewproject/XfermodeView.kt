@@ -43,12 +43,29 @@ class XfermodeView : View {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        originWithoutXfermode(canvas)
+//        originWithoutXfermode(canvas)
+
+        setXfermode(canvas, PorterDuff.Mode.SRC)
+
+
     }
 
     private fun originWithoutXfermode(canvas: Canvas?) {
         canvas?.drawBitmap(mDstBitmap, 0f, 0f, mPaint)
-        canvas?.drawBitmap(mSrcBitmap, mWidth/2f, mHeight/2f, mPaint)
+        canvas?.drawBitmap(mSrcBitmap, mWidth / 2f, mHeight / 2f, mPaint)
+    }
+
+    private fun setXfermode(canvas: Canvas?, mode: PorterDuff.Mode) {
+        val layerId =
+            canvas?.saveLayer(0f, 0f, width.toFloat(), height.toFloat(), null, Canvas.ALL_SAVE_FLAG)
+
+        canvas?.drawBitmap(mDstBitmap, 0f, 0f, mPaint)
+        mPaint.xfermode = PorterDuffXfermode(mode)
+        canvas?.drawBitmap(mSrcBitmap, mWidth / 2f, mHeight / 2f, mPaint)
+        mPaint.xfermode = null
+
+        canvas?.restoreToCount(layerId!!)
+
     }
 
     private fun makeDstBitmap(width: Int, height: Int): Bitmap {
