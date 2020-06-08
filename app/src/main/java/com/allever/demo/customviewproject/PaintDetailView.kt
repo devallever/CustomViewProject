@@ -42,6 +42,8 @@ class PaintDetailView : View {
 
         setColorWithSweepGradient(canvas)
 
+        setColorWithBitmapShader(canvas)
+
     }
 
     private fun setColorBase(canvas: Canvas?) {
@@ -121,10 +123,22 @@ class PaintDetailView : View {
         val startColor = resources.getColor(R.color.colorPrimary)
         val endColor = resources.getColor(R.color.colorAccent)
 
-        val centerX = measuredWidth/2f
+        val centerX = measuredWidth/4f
         val centerY = 450f
         val sweepGradientShader = SweepGradient(centerX, centerY, startColor, endColor)
         mPaint.shader = sweepGradientShader
+        canvas?.drawCircle(centerX, centerY, 100f, mPaint)
+    }
+
+    private fun setColorWithBitmapShader(canvas: Canvas?) {
+        mPaint.reset()
+        mPaint.isAntiAlias = true
+        mPaint.color = resources.getColor(R.color.colorPrimary)
+
+        val centerX = measuredWidth/4f * 3
+        val centerY = 450f
+        val bitmapShader = BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
+        mPaint.shader = bitmapShader
         canvas?.drawCircle(centerX, centerY, 100f, mPaint)
     }
 
