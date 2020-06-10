@@ -40,6 +40,8 @@ class PaintDetailView : View {
 
         setColorWithRadialGradient(canvas)
 
+        setColorWithSweepGradient(canvas)
+
     }
 
     private fun setColorBase(canvas: Canvas?) {
@@ -110,6 +112,20 @@ class PaintDetailView : View {
         mPaint.shader = radialGradientShader
         canvas?.drawRect(RectF(450f, 200f, 600f, 300f), mPaint)
 
+    }
+
+    private fun setColorWithSweepGradient(canvas: Canvas?) {
+        mPaint.reset()
+        mPaint.isAntiAlias = true
+        mPaint.color = resources.getColor(R.color.colorPrimary)
+        val startColor = resources.getColor(R.color.colorPrimary)
+        val endColor = resources.getColor(R.color.colorAccent)
+
+        val centerX = measuredWidth/2f
+        val centerY = 450f
+        val sweepGradientShader = SweepGradient(centerX, centerY, startColor, endColor)
+        mPaint.shader = sweepGradientShader
+        canvas?.drawCircle(centerX, centerY, 100f, mPaint)
     }
 
 }
