@@ -36,7 +36,9 @@ class PaintDetailView : View {
 
 //        setColorBase(canvas)
 //
-        setColorWithShader(canvas)
+        setColorWithLinearGradient(canvas)
+
+        setColorWithRadialGradient(canvas)
 
     }
 
@@ -58,7 +60,7 @@ class PaintDetailView : View {
         canvas?.drawText(text, 100f, 200f, mPaint)
     }
 
-    private fun setColorWithShader(canvas: Canvas?) {
+    private fun setColorWithLinearGradient(canvas: Canvas?) {
         mPaint.reset()
         mPaint.isAntiAlias = true
         mPaint.color = resources.getColor(R.color.colorPrimary)
@@ -81,6 +83,32 @@ class PaintDetailView : View {
             LinearGradient(450f, 100f, 400f, 100f, startColor, endColor, Shader.TileMode.REPEAT)
         mPaint.shader = linearGradientShader
         canvas?.drawRect(RectF(450f, 50f, 600f, 150f), mPaint)
+
+    }
+
+    private fun setColorWithRadialGradient(canvas: Canvas?) {
+        mPaint.reset()
+        mPaint.isAntiAlias = true
+        mPaint.color = resources.getColor(R.color.colorPrimary)
+
+        val startColor = resources.getColor(R.color.colorPrimary)
+        val endColor = resources.getColor(R.color.colorAccent)
+
+        //辐射渐变渐变的三种模式
+        var radialGradientShader =
+            RadialGradient(50f, 250f, 50f, startColor, endColor, Shader.TileMode.CLAMP)
+        mPaint.shader = radialGradientShader
+        canvas?.drawRect(RectF(50f, 200f, 200f, 300f), mPaint)
+
+        radialGradientShader =
+            RadialGradient(250f, 250f, 50f, startColor, endColor, Shader.TileMode.MIRROR)
+        mPaint.shader = radialGradientShader
+        canvas?.drawRect(RectF(250f, 200f, 400f, 300f), mPaint)
+
+        radialGradientShader =
+            RadialGradient(450f, 250f, 50f, startColor, endColor, Shader.TileMode.REPEAT)
+        mPaint.shader = radialGradientShader
+        canvas?.drawRect(RectF(450f, 200f, 600f, 300f), mPaint)
 
     }
 
