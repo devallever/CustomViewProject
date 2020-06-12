@@ -1,14 +1,11 @@
 package com.allever.demo.customviewproject
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
-import android.graphics.Paint
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 
-class PaintDetailView: View {
+class PaintDetailView : View {
 
     private lateinit var mPaint: Paint
 
@@ -37,7 +34,9 @@ class PaintDetailView: View {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        setColorBase(canvas)
+//        setColorBase(canvas)
+//
+        setColorWithShader(canvas)
 
     }
 
@@ -57,6 +56,32 @@ class PaintDetailView: View {
         mPaint.setARGB(255, 255, 0, 0)
         mPaint.textSize = 75f
         canvas?.drawText(text, 100f, 200f, mPaint)
+    }
+
+    private fun setColorWithShader(canvas: Canvas?) {
+        mPaint.reset()
+        mPaint.isAntiAlias = true
+        mPaint.color = resources.getColor(R.color.colorPrimary)
+
+        val startColor = resources.getColor(R.color.colorPrimary)
+        val endColor = resources.getColor(R.color.colorAccent)
+
+        //线性渐变的三种模式
+        var linearGradientShader =
+            LinearGradient(50f, 100f, 200f, 100f, startColor, endColor, Shader.TileMode.CLAMP)
+        mPaint.shader = linearGradientShader
+        canvas?.drawRect(RectF(50f, 50f, 200f, 150f), mPaint)
+
+        linearGradientShader =
+            LinearGradient(250f, 100f, 325f, 100f, startColor, endColor, Shader.TileMode.MIRROR)
+        mPaint.shader = linearGradientShader
+        canvas?.drawRect(RectF(250f, 50f, 400f, 150f), mPaint)
+
+        linearGradientShader =
+            LinearGradient(450f, 100f, 400f, 100f, startColor, endColor, Shader.TileMode.REPEAT)
+        mPaint.shader = linearGradientShader
+        canvas?.drawRect(RectF(450f, 50f, 600f, 150f), mPaint)
+
     }
 
 }
