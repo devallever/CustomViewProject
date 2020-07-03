@@ -5,11 +5,10 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-import kotlin.math.log
 
-class PaintCanvasView : View {
+class BasicCustomView : View {
 
-    private val TAG = PaintCanvasView::class.java.simpleName
+    private val TAG = BasicCustomView::class.java.simpleName
 
     private lateinit var mPaint: Paint
     private var mMeasureWidth: Int = 0
