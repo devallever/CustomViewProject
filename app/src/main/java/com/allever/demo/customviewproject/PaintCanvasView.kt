@@ -65,8 +65,10 @@ class PaintCanvasView : View {
 //        drawPathWithAddXXX(canvas)
 //
 //        drawPathWithXXXTo(canvas)
+//
+//        drawBitmap(canvas)
 
-        drawBitmap(canvas)
+        drawText(canvas)
 
     }
 
@@ -478,6 +480,16 @@ class PaintCanvasView : View {
     private fun drawBitmap(canvas: Canvas?) {
         canvas?.drawBitmap(mBitmap, 50f, 50f, mPaint)
 //        val bitmapRectF = RectF(50f, 50f, 150f, 150f)
+    }
+
+    private fun drawText(canvas: Canvas?) {
+        mPaint.reset()
+        mPaint.isAntiAlias = true
+        mPaint.color = resources.getColor(R.color.colorPrimary)
+        mPaint.textSize = 45f
+
+        val text = "Hello Android"
+        canvas?.drawText(text, 100f, 100f, mPaint)
     }
 
     override fun onDetachedFromWindow() {
