@@ -3,12 +3,17 @@ package com.allever.demo.customviewproject
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
+import kotlin.math.log
 
 class PaintCanvasView : View {
 
+    private val TAG = PaintCanvasView::class.java.simpleName
+
     private lateinit var mPaint: Paint
     private var mMeasureWidth: Int = 0
+    private lateinit var mBitmap: Bitmap
 
     constructor(context: Context) : this(context, null) {}
     constructor(context: Context, attributeSet: AttributeSet?) : this(context, attributeSet, 0)
@@ -24,6 +29,9 @@ class PaintCanvasView : View {
     private fun init() {
         mPaint = Paint()
         mPaint.color = resources.getColor(R.color.colorPrimary)
+        mBitmap = BitmapFactory.decodeResource(resources, R.drawable.test_img)
+        Log.d(TAG, "init: bitmap width = ${mBitmap.width}")
+        Log.d(TAG, "init: bitmap height = ${mBitmap.height}")
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -55,8 +63,10 @@ class PaintCanvasView : View {
 //        drawPathDirectionFillStyle(canvas)
 //
 //        drawPathWithAddXXX(canvas)
+//
+//        drawPathWithXXXTo(canvas)
 
-        drawPathWithXXXTo(canvas)
+        drawBitmap(canvas)
 
     }
 
@@ -464,5 +474,16 @@ class PaintCanvasView : View {
         )
         canvas?.drawPath(cubicPath, mPaint)
     }
+
+    private fun drawBitmap(canvas: Canvas?) {
+        canvas?.drawBitmap(mBitmap, 50f, 50f, mPaint)
+//        val bitmapRectF = RectF(50f, 50f, 150f, 150f)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        mBitmap.recycle()
+    }
+
 
 }
