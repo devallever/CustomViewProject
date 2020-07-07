@@ -51,10 +51,12 @@ class PaintCanvasView : View {
 //        drawOval(canvas)
 //
 //        drawArc(canvas)
-
+//
 //        drawPathDirectionFillStyle(canvas)
+//
+//        drawPathWithAddXXX(canvas)
 
-        drawPathWithAddXXX(canvas)
+        drawPathWithXXXTo(canvas)
 
     }
 
@@ -371,6 +373,96 @@ class PaintCanvasView : View {
         val arcRectF2 = RectF(250f, 650f, 400f, 750f)
         arcRectFPath.addArc(arcRectF2, 0f, -90f)
         canvas?.drawPath(arcRectFPath, mPaint)
+    }
+
+    private fun drawPathWithXXXTo(canvas: Canvas?) {
+        mPaint.reset()
+        mPaint.isAntiAlias = true
+        mPaint.color = resources.getColor(R.color.colorPrimary)
+        mPaint.strokeWidth = 5f
+        mPaint.style = Paint.Style.STROKE
+        mPaint.strokeCap = Paint.Cap.ROUND
+
+        //起点默认是原点开始
+        val linePath = Path()
+        linePath.lineTo(100f, 100f)
+        linePath.lineTo(mMeasureWidth - 100f, 100f)
+        canvas?.drawPath(linePath, mPaint)
+
+        //起点默认是原点开始
+        val linePath2 = Path()
+        linePath2.moveTo(100f, 150f)
+        linePath2.lineTo(mMeasureWidth - 100f, 150f)
+        canvas?.drawPath(linePath2, mPaint)
+
+        val trianglePath = Path()
+        trianglePath.moveTo(150f, 200f)
+        trianglePath.lineTo(100f, 300f)
+        trianglePath.lineTo(200f, 300f)
+        canvas?.drawPath(trianglePath, mPaint)
+
+        val trianglePath2 = Path()
+        trianglePath2.moveTo(300f, 200f)
+        trianglePath2.lineTo(250f, 300f)
+        trianglePath2.lineTo(350f, 300f)
+        trianglePath2.close() //连接起点
+        canvas?.drawPath(trianglePath2, mPaint)
+
+        mPaint.style = Paint.Style.FILL
+        val trianglePath3 = Path()
+        trianglePath3.moveTo(450f, 200f)
+        trianglePath3.lineTo(400f, 300f)
+        trianglePath3.lineTo(500f, 300f)
+        trianglePath3.close() //连接起点
+        canvas?.drawPath(trianglePath3, mPaint)
+
+        mPaint.style = Paint.Style.STROKE
+        val arcPath = Path()
+        arcPath.moveTo(100f, 400f)
+        arcPath.lineTo(200f, 400f)
+        val arcRectF = RectF(200f, 350f, 300f, 450f)
+        arcPath.arcTo(arcRectF, 180f, -180f, false)
+        arcPath.lineTo(400f, 400f)
+        val arcRectF2 = RectF(400f, 350f, 500f, 450f)
+        arcPath.arcTo(arcRectF2, 180f, 180f)
+        arcPath.lineTo(600f, 400f)
+        canvas?.drawPath(arcPath, mPaint)
+
+        //二阶曲线
+        var quadPath = Path();
+        quadPath.moveTo(100f, 600f)
+        quadPath.lineTo(mMeasureWidth - 100f, 600f)
+        canvas?.drawPath(quadPath, mPaint)
+
+        mPaint.color = resources.getColor(R.color.colorAccent)
+        quadPath = Path()
+        quadPath.moveTo(100f, 600f)
+        quadPath.quadTo((mMeasureWidth - 200f) / 4f + 100f, 400f, mMeasureWidth / 2f, 600f)
+        quadPath.quadTo((mMeasureWidth - 200f) / 4f * 3 + 100f, 400f, mMeasureWidth - 100f, 600f)
+        canvas?.drawPath(quadPath, mPaint)
+
+        mPaint.color = resources.getColor(R.color.colorAccent)
+        quadPath = Path()
+        quadPath.moveTo(100f, 600f)
+        quadPath.quadTo(mMeasureWidth / 2f, 800f, mMeasureWidth - 100f, 600f)
+        canvas?.drawPath(quadPath, mPaint)
+
+        //三阶曲线
+        mPaint.color = resources.getColor(R.color.colorPrimary)
+        var cubicPath = Path()
+        cubicPath.moveTo(100f, 900f)
+        cubicPath.lineTo(mMeasureWidth - 100f, 900f)
+        canvas?.drawPath(cubicPath, mPaint)
+
+        mPaint.color = resources.getColor(R.color.colorAccent)
+        cubicPath = Path()
+        cubicPath.moveTo(100f, 900f)
+        cubicPath.cubicTo(
+            (mMeasureWidth - 200f) / 4f + 150f, 500f,
+            (mMeasureWidth - 200f) / 4f * 3 + 50f, 1300f,
+            mMeasureWidth - 100f, 900f
+        )
+        canvas?.drawPath(cubicPath, mPaint)
     }
 
 }
