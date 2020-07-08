@@ -52,7 +52,9 @@ class PaintCanvasView : View {
 //
 //        drawArc(canvas)
 
-        drawPathDirectionFillStyle(canvas)
+//        drawPathDirectionFillStyle(canvas)
+
+        drawPathWithAddXXX(canvas)
 
     }
 
@@ -299,6 +301,76 @@ class PaintCanvasView : View {
         path.fillType = Path.FillType.EVEN_ODD
         canvas?.drawPath(path, mPaint)
 
+    }
+
+    private fun drawPathWithAddXXX(canvas: Canvas?) {
+        mPaint.reset()
+        mPaint.isAntiAlias = true
+        mPaint.color = resources.getColor(R.color.colorPrimary)
+        mPaint.strokeWidth = 5f
+
+        //圆形路径
+        mPaint.style = Paint.Style.STROKE
+        var circlePath = Path()
+        circlePath.addCircle(100f, 100f, 50f, Path.Direction.CW)
+        canvas?.drawPath(circlePath, mPaint)
+
+        mPaint.style = Paint.Style.FILL
+        circlePath = Path()
+        circlePath.addCircle(250f, 100f, 50f, Path.Direction.CW)
+        canvas?.drawPath(circlePath, mPaint)
+
+        //矩形路径
+        mPaint.style = Paint.Style.STROKE
+        var rectFPath = Path()
+        val rectF1 = RectF(50f, 200f, 200f, 300f)
+        rectFPath.addRect(rectF1, Path.Direction.CW)
+        canvas?.drawPath(rectFPath, mPaint)
+
+        mPaint.style = Paint.Style.FILL
+        rectFPath = Path()
+        val rectF2 = RectF(250f, 200f, 400f, 300f)
+        rectFPath.addRect(rectF2, Path.Direction.CW)
+        canvas?.drawPath(rectFPath, mPaint)
+
+        //圆角矩形路径
+        mPaint.style = Paint.Style.STROKE
+        var roundRectFPath = Path()
+        val roundRectF1 = RectF(50f, 350f, 200f, 450f)
+        roundRectFPath.addRoundRect(roundRectF1, 10f, 10f, Path.Direction.CW)
+        canvas?.drawPath(roundRectFPath, mPaint)
+
+        mPaint.style = Paint.Style.FILL
+        roundRectFPath = Path()
+        val roundRectF2 = RectF(250f, 350f, 400f, 450f)
+        roundRectFPath.addRoundRect(roundRectF2, 10f, 10f, Path.Direction.CW)
+        canvas?.drawPath(roundRectFPath, mPaint)
+
+        //椭圆路径
+        mPaint.style = Paint.Style.STROKE
+        var ovalRectFPath = Path()
+        val ovalRectF1 = RectF(50f, 500f, 200f, 600f)
+        ovalRectFPath.addOval(ovalRectF1, Path.Direction.CW)
+        canvas?.drawPath(ovalRectFPath, mPaint)
+
+        mPaint.style = Paint.Style.FILL
+        ovalRectFPath = Path()
+        val ovalRectF2 = RectF(250f, 500f, 400f, 600f)
+        ovalRectFPath.addOval(ovalRectF2, Path.Direction.CW)
+        canvas?.drawPath(ovalRectFPath, mPaint)
+
+        //弧形路径
+        mPaint.style = Paint.Style.STROKE
+        var arcRectFPath = Path()
+        val arcRectF1 = RectF(50f, 650f, 200f, 750f)
+        arcRectFPath.addArc(arcRectF1, 0f, -90f)
+        canvas?.drawPath(arcRectFPath, mPaint)
+
+        mPaint.style = Paint.Style.FILL
+        arcRectFPath = Path()
+        val arcRectF2 = RectF(250f, 650f, 400f, 750f)
+        arcRectFPath.addArc(arcRectF2, 0f, -90f)
+        canvas?.drawPath(arcRectFPath, mPaint)
     }
 
 }
