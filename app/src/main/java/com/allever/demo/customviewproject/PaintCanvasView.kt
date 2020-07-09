@@ -41,17 +41,18 @@ class PaintCanvasView : View {
 //        drawPoint(canvas)
 //
 //        drawLine(canvas)
+//
+//        drawCircle(canvas)
+//
+//        drawRect(canvas)
+//
+//        drawRoundRect(canvas)
+//
+//        drawOval(canvas)
+//
+//        drawArc(canvas)
 
-        drawCircle(canvas)
-
-        drawRect(canvas)
-
-        drawRoundRect(canvas)
-
-        drawOval(canvas)
-
-        drawArc(canvas)
-
+        drawPathDirectionFillStyle(canvas)
 
     }
 
@@ -206,6 +207,97 @@ class PaintCanvasView : View {
         canvas?.drawArc(rectF1, 0f, -90f, false, mPaint)
         val rectF2 = RectF(250f, 800f, 400f, 900f)
         canvas?.drawArc(rectF2, 0f, -90f, true, mPaint)
+
+    }
+
+    private fun drawPathDirectionFillStyle(canvas: Canvas?) {
+        val path = Path()
+
+        mPaint.reset()
+        mPaint.isAntiAlias = true
+        mPaint.color = resources.getColor(R.color.colorPrimary)
+        mPaint.strokeWidth = 5f
+
+        //相交圆
+        mPaint.style = Paint.Style.STROKE
+        path.reset()
+        path.addCircle(100f, 100f, 50f, Path.Direction.CW)
+        canvas?.drawPath(path, mPaint)
+
+        path.reset()
+        path.addCircle(250f, 100f, 50f, Path.Direction.CW)
+        path.addCircle(300f, 100f, 50f, Path.Direction.CW)
+        canvas?.drawPath(path, mPaint)
+
+        mPaint.style = Paint.Style.FILL
+        path.reset()
+        path.addCircle(100f, 250f, 50f, Path.Direction.CW)
+        canvas?.drawPath(path, mPaint)
+
+        path.reset()
+        path.addCircle(250f, 250f, 50f, Path.Direction.CW)
+        path.addCircle(300f, 250f, 50f, Path.Direction.CW)
+        path.fillType = Path.FillType.WINDING //默认
+        canvas?.drawPath(path, mPaint)
+
+        path.reset()
+        path.addCircle(450f, 250f, 50f, Path.Direction.CW)
+        path.addCircle(500f, 250f, 50f, Path.Direction.CW)
+        path.fillType = Path.FillType.EVEN_ODD
+        canvas?.drawPath(path, mPaint)
+
+        path.reset()
+        path.addCircle(250f, 400f, 50f, Path.Direction.CW) //顺时针
+        path.addCircle(300f, 400f, 50f, Path.Direction.CCW) //逆时针
+        path.fillType = Path.FillType.WINDING //默认
+        canvas?.drawPath(path, mPaint)
+
+        path.reset()
+        path.addCircle(450f, 400f, 50f, Path.Direction.CW)
+        path.addCircle(500f, 400f, 50f, Path.Direction.CCW)
+        path.fillType = Path.FillType.EVEN_ODD
+        canvas?.drawPath(path, mPaint)
+
+
+        //同心圆
+        mPaint.style = Paint.Style.STROKE
+        path.reset()
+        path.addCircle(100f, 550f, 50f, Path.Direction.CW)
+        canvas?.drawPath(path, mPaint)
+
+        path.reset()
+        path.addCircle(250f, 550f, 50f, Path.Direction.CW)
+        path.addCircle(250f, 550f, 30f, Path.Direction.CW)
+        canvas?.drawPath(path, mPaint)
+
+        mPaint.style = Paint.Style.FILL
+        path.reset()
+        path.addCircle(100f, 700f, 50f, Path.Direction.CW)
+        canvas?.drawPath(path, mPaint)
+
+        path.reset()
+        path.addCircle(250f, 700f, 50f, Path.Direction.CW)
+        path.addCircle(250f, 700f, 30f, Path.Direction.CW)
+        path.fillType = Path.FillType.WINDING //默认
+        canvas?.drawPath(path, mPaint)
+
+        path.reset()
+        path.addCircle(450f, 700f, 50f, Path.Direction.CW)
+        path.addCircle(450f, 700f, 30f, Path.Direction.CW)
+        path.fillType = Path.FillType.EVEN_ODD
+        canvas?.drawPath(path, mPaint)
+
+        path.reset()
+        path.addCircle(250f, 850f, 50f, Path.Direction.CW)
+        path.addCircle(250f, 850f, 30f, Path.Direction.CCW)
+        path.fillType = Path.FillType.WINDING //默认
+        canvas?.drawPath(path, mPaint)
+
+        path.reset()
+        path.addCircle(450f, 850f, 50f, Path.Direction.CW)
+        path.addCircle(450f, 850f, 30f, Path.Direction.CCW)
+        path.fillType = Path.FillType.EVEN_ODD
+        canvas?.drawPath(path, mPaint)
 
     }
 
