@@ -50,6 +50,8 @@ class PaintCanvasView : View {
 
         drawOval(canvas)
 
+        drawArc(canvas)
+
 
     }
 
@@ -187,6 +189,24 @@ class PaintCanvasView : View {
         mPaint.style = Paint.Style.FILL_AND_STROKE
         val rectF2 = RectF(450f, 500f, 600f, 600f)
         canvas?.drawOval(rectF2, mPaint)
+    }
+
+    private fun drawArc(canvas: Canvas?) {
+        mPaint.reset()
+        mPaint.isAntiAlias = true
+        mPaint.color = resources.getColor(R.color.colorPrimary)
+        mPaint.strokeWidth = 5f
+
+        mPaint.style = Paint.Style.FILL
+        canvas?.drawArc(50f, 650f, 200f, 750f, 0f, -90f, false, mPaint)
+        canvas?.drawArc(250f, 650f, 400f, 750f, 0f, -90f, true, mPaint)
+
+        mPaint.style = Paint.Style.STROKE
+        val rectF1 = RectF(50f, 800f, 200f, 900f)
+        canvas?.drawArc(rectF1, 0f, -90f, false, mPaint)
+        val rectF2 = RectF(250f, 800f, 400f, 900f)
+        canvas?.drawArc(rectF2, 0f, -90f, true, mPaint)
+
     }
 
 }
