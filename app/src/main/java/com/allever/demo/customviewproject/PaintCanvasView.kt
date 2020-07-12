@@ -47,6 +47,8 @@ class PaintCanvasView : View {
 
         drawRect(canvas)
 
+        drawRoundRect(canvas)
+
 
     }
 
@@ -148,5 +150,23 @@ class PaintCanvasView : View {
         mPaint.style = Paint.Style.FILL_AND_STROKE
         val rectF = RectF(450f, 200f, 600f, 300f)
         canvas?.drawRect(rectF, mPaint)
+    }
+
+    private fun drawRoundRect(canvas: Canvas?) {
+        mPaint.reset()
+        mPaint.isAntiAlias = true
+        mPaint.color = resources.getColor(R.color.colorPrimary)
+        mPaint.strokeWidth = 10f
+
+        mPaint.style = Paint.Style.FILL
+        canvas?.drawRoundRect(50f, 350f, 200f, 450f, 10f, 10f,  mPaint)
+
+        mPaint.style = Paint.Style.STROKE
+        val rectF1 = RectF(250f, 350f, 400f, 450f)
+        canvas?.drawRoundRect(rectF1, 20f, 20f,  mPaint)
+
+        mPaint.style = Paint.Style.FILL_AND_STROKE
+        val rectF2 = RectF(450f, 350f, 600f, 450f)
+        canvas?.drawRoundRect(rectF2, 30f, 30f,  mPaint)
     }
 }
