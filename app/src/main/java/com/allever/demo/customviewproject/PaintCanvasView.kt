@@ -1,9 +1,7 @@
 package com.allever.demo.customviewproject
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import com.allever.demo.customviewproject.util.DisplayUtils
@@ -46,6 +44,8 @@ class PaintCanvasView : View {
 //        drawLine(canvas)
 
         drawCircle(canvas)
+
+        drawRect(canvas)
 
 
     }
@@ -130,5 +130,23 @@ class PaintCanvasView : View {
         mPaint.style = Paint.Style.FILL_AND_STROKE
         canvas?.drawCircle(500f, 100f, 50f, mPaint)
 
+    }
+
+    private fun drawRect(canvas: Canvas?) {
+        mPaint.reset()
+        mPaint.isAntiAlias = true
+        mPaint.color = resources.getColor(R.color.colorPrimary)
+        mPaint.strokeWidth = 10f
+
+        mPaint.style = Paint.Style.FILL
+        canvas?.drawRect(50f, 200f, 200f, 300f, mPaint)
+
+        mPaint.style = Paint.Style.STROKE
+        val rect = Rect(250, 200, 400, 300)
+        canvas?.drawRect(rect, mPaint)
+
+        mPaint.style = Paint.Style.FILL_AND_STROKE
+        val rectF = RectF(450f, 200f, 600f, 300f)
+        canvas?.drawRect(rectF, mPaint)
     }
 }
