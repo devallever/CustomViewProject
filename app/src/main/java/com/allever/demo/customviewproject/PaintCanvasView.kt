@@ -37,13 +37,15 @@ class PaintCanvasView : View {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        drawRGB(canvas)
-
+//        drawRGB(canvas)
+//
 //        drawColor(canvas)
+//
+//        drawPoint(canvas)
+//
+//        drawLine(canvas)
 
-        drawPoint(canvas)
-
-        drawLine(canvas)
+        drawCircle(canvas)
 
 
     }
@@ -111,5 +113,22 @@ class PaintCanvasView : View {
     private fun drawRGB(canvas: Canvas?) {
         canvas?.drawRGB(255, 0, 0)
 //        canvas?.drawARGB(128, 255, 0, 0)
+    }
+
+    private fun drawCircle(canvas: Canvas?) {
+        mPaint.reset()
+        mPaint.isAntiAlias = true
+        mPaint.color = resources.getColor(R.color.colorPrimary)
+        mPaint.strokeWidth = 10f
+
+        mPaint.style = Paint.Style.FILL
+        canvas?.drawCircle(100f, 100f, 50f, mPaint)
+
+        mPaint.style = Paint.Style.STROKE
+        canvas?.drawCircle(300f, 100f, 50f, mPaint)
+
+        mPaint.style = Paint.Style.FILL_AND_STROKE
+        canvas?.drawCircle(500f, 100f, 50f, mPaint)
+
     }
 }
