@@ -37,7 +37,9 @@ class PaintCanvasView : View {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        drawColor(canvas)
+        drawRGB(canvas)
+
+//        drawColor(canvas)
 
         drawPoint(canvas)
 
@@ -104,5 +106,10 @@ class PaintCanvasView : View {
     private fun drawColor(canvas: Canvas?) {
         canvas?.drawColor(resources.getColor(R.color.colorAccent))
         //canvas?.drawColor(Color.parseColor("#03DAC5"))
+    }
+
+    private fun drawRGB(canvas: Canvas?) {
+        canvas?.drawRGB(255, 0, 0)
+//        canvas?.drawARGB(128, 255, 0, 0)
     }
 }
