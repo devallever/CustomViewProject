@@ -2,6 +2,7 @@ package com.allever.demo.customviewproject
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
@@ -36,9 +37,12 @@ class PaintCanvasView : View {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
+        drawColor(canvas)
+
         drawPoint(canvas)
 
         drawLine(canvas)
+
 
     }
 
@@ -97,4 +101,8 @@ class PaintCanvasView : View {
 
     }
 
+    private fun drawColor(canvas: Canvas?) {
+        canvas?.drawColor(resources.getColor(R.color.colorAccent))
+        //canvas?.drawColor(Color.parseColor("#03DAC5"))
+    }
 }
