@@ -10,6 +10,7 @@ import com.allever.demo.customviewproject.util.DisplayUtils
 class PaintCanvasView : View {
 
     private lateinit var mPaint: Paint
+    private var mMeasureWidth: Int = 0
 
     constructor(context: Context) : this(context, null) {}
     constructor(context: Context, attributeSet: AttributeSet?) : this(context, attributeSet, 0)
@@ -29,12 +30,15 @@ class PaintCanvasView : View {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        mMeasureWidth = MeasureSpec.getSize(widthMeasureSpec)
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
         drawPoint(canvas)
+
+        drawLine(canvas)
 
     }
 
@@ -64,6 +68,33 @@ class PaintCanvasView : View {
             500f, pointsY
         ).toFloatArray()
         canvas?.drawPoints(points, mPaint)
+    }
+
+    private fun drawLine(canvas: Canvas?) {
+        mPaint.reset()
+        mPaint.color = resources.getColor(R.color.colorPrimary)
+        mPaint.isAntiAlias = true
+
+        mPaint.strokeWidth = 10f
+        mPaint.strokeCap = Paint.Cap.ROUND
+        canvas?.drawLine(100f, 300f, mMeasureWidth - 100f, 300f, mPaint)
+
+        mPaint.strokeWidth = 10f
+        mPaint.strokeCap = Paint.Cap.SQUARE
+        canvas?.drawLine(100f, 400f, mMeasureWidth - 100f, 400f, mPaint)
+
+        mPaint.strokeWidth = 10f
+        mPaint.strokeCap = Paint.Cap.BUTT
+        canvas?.drawLine(100f, 500f, mMeasureWidth - 100f, 500f, mPaint)
+
+        mPaint.strokeWidth = 20f
+        mPaint.strokeCap = Paint.Cap.ROUND
+        val lines = listOf(
+            100f, 600f, mMeasureWidth - 100f, 600f,
+            100f, 700f, mMeasureWidth - 100f, 700f
+        ).toFloatArray()
+        canvas?.drawLines(lines, mPaint)
+
     }
 
 }
