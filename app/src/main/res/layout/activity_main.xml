@@ -6,9 +6,8 @@
 	android:layout_height="match_parent"
 	tools:context=".MainActivity">
 
-	<com.allever.demo.customviewproject.XfermodeView
+	<com.allever.demo.customviewproject.PaintDetailView
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:layout_margin="10dp"/>
+		android:layout_height="match_parent"/>
 
 </RelativeLayout>

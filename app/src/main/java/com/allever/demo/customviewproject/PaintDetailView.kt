@@ -36,13 +36,15 @@ class PaintDetailView : View {
 
 //        setColorBase(canvas)
 //
-        setColorWithLinearGradient(canvas)
+//        setColorWithLinearGradient(canvas)
+//
+//        setColorWithRadialGradient(canvas)
+//
+//        setColorWithSweepGradient(canvas)
+//
+//        setColorWithBitmapShader(canvas)
 
-        setColorWithRadialGradient(canvas)
-
-        setColorWithSweepGradient(canvas)
-
-        setColorWithBitmapShader(canvas)
+        setColorWithColorFilter(canvas)
 
     }
 
@@ -139,7 +141,35 @@ class PaintDetailView : View {
         val centerY = 450f
         val bitmapShader = BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
         mPaint.shader = bitmapShader
-        canvas?.drawCircle(centerX, centerY, 100f, mPaint)
+        canvas?.drawCircle(centerX+50, centerY+50, 100f, mPaint)
     }
 
+    private fun setColorWithColorFilter(canvas: Canvas?) {
+        mPaint.reset()
+
+//        //原始
+//        val colorFilter = LightingColorFilter(0xffffff, 0x000000)
+//        mPaint.colorFilter = colorFilter
+//        canvas?.drawBitmap(mBitmap, 50f, 50f, mPaint)
+
+//        //去掉红色
+//        val colorFilter = LightingColorFilter(0x00ffff, 0x000000)
+//        mPaint.colorFilter = colorFilter
+//        canvas?.drawBitmap(mBitmap, 50f, 50f, mPaint)
+
+//        //增强红色
+//        val colorFilter = LightingColorFilter(0xffffff, 0x500000)
+//        mPaint.colorFilter = colorFilter
+//        canvas?.drawBitmap(mBitmap, 50f, 50f, mPaint)
+
+//        //增强红色和蓝色
+//        val colorFilter = LightingColorFilter(0xffffff, 0x500030)
+//        mPaint.colorFilter = colorFilter
+//        canvas?.drawBitmap(mBitmap, 50f, 50f, mPaint)
+
+        //增强红色和蓝色， 去掉绿色
+        val colorFilter = LightingColorFilter(0xff00ff, 0x500030)
+        mPaint.colorFilter = colorFilter
+        canvas?.drawBitmap(mBitmap, 50f, 50f, mPaint)
+    }
 }
