@@ -50,8 +50,10 @@ class PaintDetailView : View {
 //
 //
 //        lineShape(canvas)
-
-        pathEffect(canvas)
+//
+//        pathEffect(canvas)
+//
+        shadowLayer(canvas)
 
 
     }
@@ -316,5 +318,17 @@ class PaintDetailView : View {
         val composePathEffect = ComposePathEffect(dashPathEffect, discretePathEffect)
         mPaint.pathEffect = composePathEffect
         canvas?.drawPath(path, mPaint)
+    }
+
+    private fun shadowLayer(canvas: Canvas?) {
+        mPaint.reset()
+        mPaint.isAntiAlias = true
+        mPaint.color = resources.getColor(R.color.colorPrimary)
+        mPaint.style = Paint.Style.STROKE
+        mPaint.textSize = 80f
+
+        val text = "Hello Android"
+        mPaint.setShadowLayer(10f, 0f, 0f, Color.RED)
+        canvas?.drawText(text, 100f, 100f, mPaint)
     }
 }
