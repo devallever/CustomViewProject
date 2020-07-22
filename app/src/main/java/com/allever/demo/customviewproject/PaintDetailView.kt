@@ -47,9 +47,12 @@ class PaintDetailView : View {
 //        setColorWithLightColorFilter(canvas)
 //
 //        setColorWithPorterDuffColorFilter(canvas)
+//
+//
+//        lineShape(canvas)
 
+        pathEffect(canvas)
 
-        lineShape(canvas)
 
     }
 
@@ -223,6 +226,95 @@ class PaintDetailView : View {
         path.lineTo(550f, 450f)
         path.lineTo(650f, 550f)
         mPaint.strokeJoin = Paint.Join.ROUND
+        canvas?.drawPath(path, mPaint)
+    }
+
+    private fun pathEffect(canvas: Canvas?) {
+        mPaint.reset()
+        mPaint.isAntiAlias = true
+        mPaint.strokeWidth = 10f
+        mPaint.color = resources.getColor(R.color.colorPrimary)
+        mPaint.style = Paint.Style.STROKE
+        mPaint.strokeCap = Paint.Cap.ROUND
+
+        var path = Path()
+        path.moveTo(50f, 150f)
+        path.lineTo(150f, 50f)
+        path.lineTo(250f, 150f)
+        path.lineTo(350f, 50f)
+        path.lineTo(450f, 150f)
+        path.lineTo(550f, 50f)
+        path.lineTo(650f, 150f)
+        //把拐角变成圆角
+        val cornerPathEffect = CornerPathEffect(20f)
+        mPaint.pathEffect = cornerPathEffect
+        canvas?.drawPath(path, mPaint)
+
+        path = Path()
+        path.moveTo(50f, 250f)
+        path.lineTo(150f, 150f)
+        path.lineTo(250f, 250f)
+        path.lineTo(350f, 150f)
+        path.lineTo(450f, 250f)
+        path.lineTo(550f, 150f)
+        path.lineTo(650f, 250f)
+        //把线条进行随机的偏离，让轮廓变得乱七八糟。
+        val discretePathEffect = DiscretePathEffect(20f, 10f)
+        mPaint.pathEffect = discretePathEffect
+        canvas?.drawPath(path, mPaint)
+
+        path = Path()
+        path.moveTo(50f, 350f)
+        path.lineTo(150f, 250f)
+        path.lineTo(250f, 350f)
+        path.lineTo(350f, 250f)
+        path.lineTo(450f, 350f)
+        path.lineTo(550f, 250f)
+        path.lineTo(650f, 350f)
+        //虚线效果
+        val params = listOf(30f, 20f).toFloatArray()
+        val dashPathEffect = DashPathEffect(params, 0f)
+        mPaint.pathEffect = dashPathEffect
+        canvas?.drawPath(path, mPaint)
+
+        path = Path()
+        path.moveTo(50f, 450f)
+        path.lineTo(150f, 350f)
+        path.lineTo(250f, 450f)
+        path.lineTo(350f, 350f)
+        path.lineTo(450f, 450f)
+        path.lineTo(550f, 350f)
+        path.lineTo(650f, 450f)
+        //使用路径作为虚线分割
+        val circlePath = Path()
+        circlePath.addCircle(0f, 0f, 10f, Path.Direction.CW)
+        val pathDashPathEffect = PathDashPathEffect(circlePath, 30f, 0f, PathDashPathEffect.Style.TRANSLATE)
+        mPaint.pathEffect = pathDashPathEffect
+        canvas?.drawPath(path, mPaint)
+
+        path = Path()
+        path.moveTo(50f, 550f)
+        path.lineTo(150f, 450f)
+        path.lineTo(250f, 550f)
+        path.lineTo(350f, 450f)
+        path.lineTo(450f, 550f)
+        path.lineTo(550f, 450f)
+        path.lineTo(650f, 550f)
+        val sumPathEffect = SumPathEffect(dashPathEffect, discretePathEffect)
+        mPaint.pathEffect = sumPathEffect
+        canvas?.drawPath(path, mPaint)
+
+
+        path = Path()
+        path.moveTo(50f, 650f)
+        path.lineTo(150f, 550f)
+        path.lineTo(250f, 650f)
+        path.lineTo(350f, 550f)
+        path.lineTo(450f, 650f)
+        path.lineTo(550f, 550f)
+        path.lineTo(650f, 650f)
+        val composePathEffect = ComposePathEffect(dashPathEffect, discretePathEffect)
+        mPaint.pathEffect = composePathEffect
         canvas?.drawPath(path, mPaint)
     }
 }
