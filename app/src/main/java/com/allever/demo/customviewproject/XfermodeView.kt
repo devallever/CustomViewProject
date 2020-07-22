@@ -80,8 +80,12 @@ class XfermodeView : View {
 //        //
 //        setXfermode(canvas, PorterDuff.Mode.XOR)
 //
+//        //
+//        setXfermode(canvas, PorterDuff.Mode.ADD)
+//
         //
-        setXfermode(canvas, PorterDuff.Mode.ADD)
+        setXfermode(canvas, PorterDuff.Mode.LIGHTEN)
+
 
 
     }
