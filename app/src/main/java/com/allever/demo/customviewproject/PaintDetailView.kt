@@ -43,8 +43,13 @@ class PaintDetailView : View {
 //        setColorWithSweepGradient(canvas)
 //
 //        setColorWithBitmapShader(canvas)
+//
+//        setColorWithLightColorFilter(canvas)
+//
+//        setColorWithPorterDuffColorFilter(canvas)
 
-        setColorWithColorFilter(canvas)
+
+        lineShape(canvas)
 
     }
 
@@ -144,7 +149,7 @@ class PaintDetailView : View {
         canvas?.drawCircle(centerX+50, centerY+50, 100f, mPaint)
     }
 
-    private fun setColorWithColorFilter(canvas: Canvas?) {
+    private fun setColorWithLightColorFilter(canvas: Canvas?) {
         mPaint.reset()
 
 //        //原始
@@ -171,5 +176,53 @@ class PaintDetailView : View {
         val colorFilter = LightingColorFilter(0xff00ff, 0x500030)
         mPaint.colorFilter = colorFilter
         canvas?.drawBitmap(mBitmap, 50f, 50f, mPaint)
+    }
+
+    private fun setColorWithPorterDuffColorFilter(canvas: Canvas?) {
+        mPaint.reset()
+        val colorFilter = PorterDuffColorFilter(0xff00ff, PorterDuff.Mode.SRC)
+        mPaint.colorFilter = colorFilter
+        canvas?.drawBitmap(mBitmap, 50f, 50f, mPaint)
+    }
+
+    private fun lineShape(canvas: Canvas?) {
+        mPaint.reset()
+        mPaint.isAntiAlias = true
+        mPaint.strokeWidth = 30f
+        mPaint.color = resources.getColor(R.color.colorPrimary)
+        mPaint.style = Paint.Style.STROKE
+
+        var path = Path()
+        path.moveTo(50f, 150f)
+        path.lineTo(150f, 50f)
+        path.lineTo(250f, 150f)
+        path.lineTo(350f, 50f)
+        path.lineTo(450f, 150f)
+        path.lineTo(550f, 50f)
+        path.lineTo(650f, 150f)
+        mPaint.strokeJoin = Paint.Join.MITER //默认
+        canvas?.drawPath(path, mPaint)
+
+        path = Path()
+        path.moveTo(50f, 350f)
+        path.lineTo(150f, 250f)
+        path.lineTo(250f, 350f)
+        path.lineTo(350f, 250f)
+        path.lineTo(450f, 350f)
+        path.lineTo(550f, 250f)
+        path.lineTo(650f, 350f)
+        mPaint.strokeJoin = Paint.Join.BEVEL
+        canvas?.drawPath(path, mPaint)
+
+        path = Path()
+        path.moveTo(50f, 550f)
+        path.lineTo(150f, 450f)
+        path.lineTo(250f, 550f)
+        path.lineTo(350f, 450f)
+        path.lineTo(450f, 550f)
+        path.lineTo(550f, 450f)
+        path.lineTo(650f, 550f)
+        mPaint.strokeJoin = Paint.Join.ROUND
+        canvas?.drawPath(path, mPaint)
     }
 }
