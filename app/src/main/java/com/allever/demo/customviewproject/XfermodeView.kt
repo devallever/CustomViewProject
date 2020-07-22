@@ -92,8 +92,11 @@ class XfermodeView : View {
 //        //
 //        setXfermode(canvas, PorterDuff.Mode.MULTIPLY)
 //
+//        //
+//        setXfermode(canvas, PorterDuff.Mode.OVERLAY)
+//
         //
-        setXfermode(canvas, PorterDuff.Mode.OVERLAY)
+        setXfermode(canvas, PorterDuff.Mode.SCREEN)
 
 
 
