@@ -53,8 +53,9 @@ class PaintDetailView : View {
 //
 //        pathEffect(canvas)
 //
-        shadowLayer(canvas)
-
+//        shadowLayer(canvas)
+//
+        maskFilter(canvas)
 
     }
 
@@ -330,5 +331,13 @@ class PaintDetailView : View {
         val text = "Hello Android"
         mPaint.setShadowLayer(10f, 0f, 0f, Color.RED)
         canvas?.drawText(text, 100f, 100f, mPaint)
+    }
+
+    private fun maskFilter(canvas: Canvas?) {
+        mPaint.reset()
+        val blurMaskFilter = BlurMaskFilter(10F, BlurMaskFilter.Blur.INNER)
+        mPaint.maskFilter = blurMaskFilter
+        canvas?.drawBitmap(mBitmap, 50f, 50f, mPaint)
+
     }
 }
